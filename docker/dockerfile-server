@@ -1,0 +1,28 @@
+FROM php:7.1-apache
+
+ARG VIRTUAL_HOST
+
+ADD ./public /var/www/html/public
+ADD ./docker/conf/app.conf /etc/apache2/sites-available/$VIRTUAL_HOST.conf
+
+RUN sed -i 's/APP_HOST/$VIRTUAL_HOST/g' /etc/apache2/sites-available/$VIRTUAL_HOST.conf
+
+RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf
+
+#RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf \
+RUN a2enconf fqdn \
+    && a2enmod rewrite expires \
+    && a2dissite 000-default.conf \
+    && a2ensite $VIRTUAL_HOST.conf \
+    && service apache2 restart
+
+# Set timezone
+RUN rm /etc/localtime
+RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+RUN "date"
+
+RUN usermod -u 1000 www-data
+
+WORKDIR /var/www/html
+
+EXPOSE 80 443

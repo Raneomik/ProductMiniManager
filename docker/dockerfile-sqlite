@@ -1,0 +1,7 @@
+FROM alpine
+
+RUN apk update \
+    && apk add sqlite \
+    && apk add socat
+
+EXPOSE 3305

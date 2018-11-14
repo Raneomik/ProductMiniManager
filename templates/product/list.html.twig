@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href={{ path('shopping_cart') }}>Shopping Cart</a>
+    <div class="container">
+        <div class="row">
+            <div>
+                {% for product in products %}
+                    <div class="col-sm">{{ product.name }}
+                        <a href="{{ path('product_detail', {'id': product.id}) }}">{{ 'see_details'|trans }}</a>
+                        <a href="{{ path('shopping_cart_add', {'id': product.id}) }}">{{ 'cart.add'|trans }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

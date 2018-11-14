@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('product_list') }}">{{ 'return'|trans }}</a>
+
+<li>{{ 'product.id'|trans }} : {{ product.id }}</li>
+
+<li>{{ 'product.name'|trans }} : {{ product.name }}</li>
+
+<li>{{ 'product.description'|trans }} : {{ product.description }}</li>
+
+<li>{{ 'product.price'|trans }} : {{ product.price }}</li>
+
+{% endblock %}

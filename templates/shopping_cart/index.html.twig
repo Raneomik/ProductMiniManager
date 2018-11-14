@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block body %}
+
+    <ul>
+    {% for product_item in product_items %}
+        <li>{{ product_item.product.name }} ({{ product_item.quantity }})
+            <a href="{{ path('product_detail', {'id': product_item.product.id}) }}">{{ 'see_details'|trans }}</a>
+            <a href="{{ path('shopping_cart_remove', {'id': product_item.product.id}) }}">{{ 'cart.remove'|trans }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="{{ path('shopping_cart_clean') }}">{{ 'cart.clean'|trans }}</a>
+
+{% endblock %}

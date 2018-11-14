@@ -8,14 +8,5 @@ services:
       dockerfile: docker/dockerfile-server
       args:
         VIRTUAL_HOST: 'product.manager.sf' #To add to your hosts with container-ip
-
     volumes:
       - ./:/var/www/html
-    links:
-      - sqlite
-
-  sqlite:
-    container_name: product-manager-db
-    build:
-      context: docker
-      dockerfile: dockerfile-sqlite

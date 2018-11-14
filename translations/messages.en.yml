@@ -1,0 +1,16 @@
+product:
+  description: description
+  entity: product
+  id: id
+  list: list
+  name: name
+  price: price
+
+cart:
+  add: add to cart
+  remove: remove from cart
+  name: Shopping cart
+  clean: remova all
+
+return: return
+see_details: see details

@@ -8,7 +8,7 @@
     {% for product_item in product_items %}
         <li>{{ product_item.product.name }} ({{ product_item.quantity }} : {{ product_item.totalPrice ~ 'currency.symbol.euro'|trans }})
             <a href="{{ path('product_detail', {'id': product_item.product.id}) }}">{{ 'see_details'|trans }}</a>
-            <a href="{{ path('shopping_cart_remove', {'id': product_item.product.id}) }}"><i class="fa fa-remove"></i></a>
+            <a href="{{ path('shopping_cart_remove', {'id': product_item.product.id}) }}">{{ 'cart.remove.one'|trans }}</a>
         </li>
     {% endfor %}
     </ul>

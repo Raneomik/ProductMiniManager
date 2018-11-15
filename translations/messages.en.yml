@@ -2,6 +2,7 @@
 cart:
   add: Add to cart
   remove: Remove from cart
+  remove.one: Remove one from cart
   name: Shopping cart
   clean: Remove all
 

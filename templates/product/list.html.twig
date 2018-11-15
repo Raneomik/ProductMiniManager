@@ -6,9 +6,9 @@
             {% if loop.index0 % 3 == 0 %}
                 <div class="row">
             {% endif %}
-            <div class="col-sm-4">
+            <div class="col-sm-4 border-0 rounded text-center">
                 <div>{{ product.name }}</div>
-                <a href="{{ path('product_detail', {'id': product.id}) }}">{{ 'see_details'|trans }}</a>
+                <a href="{{ path('product_detail', {'id': product.id}) }}">{{ 'see_details'|trans }}</a><br/>
             </div>
             {% if loop.index % 3 == 0 %}
                 </div>

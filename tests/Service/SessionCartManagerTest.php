@@ -11,7 +11,7 @@ namespace App\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class SessionCartManagerTest extends \PHPUnit_Framework_TestCase
+class SessionCartManagerTest extends KernelTestCase
 {
 
 }

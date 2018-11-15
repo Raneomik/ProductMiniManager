@@ -2,17 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- */
 class CartItem
 {
     /**
-     * @ORM\GeneratedValue()
+     * @var int id
      */
     private $id;
-
 
     /**
      * @var Product $product
@@ -33,6 +28,23 @@ class CartItem
     }
 
     /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return int
+     *
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
      * @return int
      */
     public function getQuantity(): int
@@ -49,41 +61,28 @@ class CartItem
     }
 
     /**
-     * @param mixed $id
+     * @return Product
      */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    private $shoppingCart;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getProduct(): Product
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param Product $product
+     * @return CartItem
+     */
     public function setProduct(Product $product): self
     {
+        $this->id = $product->getId();
         $this->product = $product;
 
         return $this;
     }
 
-    public function getShoppingCart(): ShoppingCart
+    public function getTotalPrice() : float
     {
-        return $this->shoppingCart;
+        return $this->product->getPrice() * $this->quantity;
     }
 
-    public function setShoppingCart(ShoppingCart $shoppingCart): self
-    {
-        $this->shoppingCart = $shoppingCart;
-
-        return $this;
-    }
 }

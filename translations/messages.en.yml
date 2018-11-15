@@ -1,16 +1,28 @@
-product:
-  description: description
-  entity: product
-  id: id
-  list: list
-  name: name
-  price: price
 
 cart:
-  add: add to cart
-  remove: remove from cart
+  add: Add to cart
+  remove: Remove from cart
   name: Shopping cart
-  clean: remova all
+  clean: Remove all
 
-return: return
-see_details: see details
+currency:
+  name: Currency
+  symbol:
+    dollar: $
+    euro: €
+    pound: £
+
+home: Home
+
+product:
+  description: Description
+  entity: Product
+  id: id
+  list: Product List
+  name: Product Name
+  price: Price
+
+
+
+return: Return
+see_details: See details

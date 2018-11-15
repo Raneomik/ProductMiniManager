@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('product_list') }}">{{ 'return'|trans }}</a>
 
-<li>{{ 'product.id'|trans }} : {{ product.id }}</li>
+    <h2 class="text-center">{{ product.name }} <i class="small">({{ 'product.id'|trans ~ ' : ' ~ product.id }})</i></h2>
 
-<li>{{ 'product.name'|trans }} : {{ product.name }}</li>
-
-<li>{{ 'product.description'|trans }} : {{ product.description }}</li>
-
-<li>{{ 'product.price'|trans }} : {{ product.price }}</li>
+    <h3>{{ 'product.price'|trans }} : {{ product.price|number_format(2) }} {{ 'currency.symbol.euro'|trans }}</h3>
+        {{ form(AddToCartForm, { 'action' : path('shopping_cart_add')}) }}
+    <h4>{{ 'product.description'|trans }} :</h4>
+    <p>{{ product.description }}</p>
 
 {% endblock %}

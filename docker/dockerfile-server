@@ -9,6 +9,7 @@ RUN sed -i 's/APP_HOST/$VIRTUAL_HOST/g' /etc/apache2/sites-available/$VIRTUAL_HO
 
 RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf
 
+
 #RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf \
 RUN a2enconf fqdn \
     && a2enmod rewrite expires \

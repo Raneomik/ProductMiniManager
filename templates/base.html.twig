@@ -9,8 +9,32 @@
     {% endblock %}
 </head>
 <body>
-{% block body %}{% endblock %}
+{% block header %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href={{ path('product_list') }}>{{ 'home'|trans }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2"  id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href={{ path('shopping_cart') }}>{{ 'cart.name'|trans }}
+                        <span class="fa-stack fa-1x">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <strong class="fa-stack-1x text-white">
+                                {{ total_cart_item_number() }}
+                            </strong>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+<div class="container">
+{% block body %}{% endblock %}
+</div>
 {% block javascripts %}
     <script src="{{ asset('build/js/app.js') }}"></script>
 {% endblock %}

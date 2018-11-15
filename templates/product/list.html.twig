@@ -1,19 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href={{ path('shopping_cart') }}>Shopping Cart</a>
-    <div class="container">
-        <div class="row">
-            <div>
-                {% for product in products %}
-                    <div class="col-sm">{{ product.name }}
-                        <a href="{{ path('product_detail', {'id': product.id}) }}">{{ 'see_details'|trans }}</a>
-                        <a href="{{ path('shopping_cart_add', {'id': product.id}) }}">{{ 'cart.add'|trans }}</a>
-                    </div>
-                {% endfor %}
+    <h1 class="text-center">{{ 'product.list'|trans }}</h1>
+        {% for product in products %}
+            {% if loop.index0 % 3 == 0 %}
+                <div class="row">
+            {% endif %}
+            <div class="col-sm-4">
+                <div>{{ product.name }}</div>
+                <a href="{{ path('product_detail', {'id': product.id}) }}">{{ 'see_details'|trans }}</a>
             </div>
-
-        </div>
-    </div>
+            {% if loop.index % 3 == 0 %}
+                </div>
+            {% endif %}
+        {% endfor %}
 
 {% endblock %}

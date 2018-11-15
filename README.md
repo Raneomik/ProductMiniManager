@@ -10,11 +10,15 @@ Symfony 4 / Docker training project
 
 ### Start app
 
+* Install dependencies:
+
 ```
 composer install -o
+
+yarn
 ```
 
-start docker php 7 server :
+* start docker php 7 server :
 ```
 sudo docker-compose up -d --force-recreate --remove-orphans
 ```
@@ -25,14 +29,13 @@ sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}
 ```
 
 
-init db :
+* init and populate db :
 ```
-sudo docker exec -it product-manager-srv bin/console doctrine:database:create
-sudo docker exec -it product-manager-srv bin/console  doctrine:schema:create
-
+sudo docker exec -it product-manager-srv bin/console doctrine:schema:update --force
+sudo docker exec -it product-manager-srv bin/console doctrine:fixtures:load
 ```
 
-build assets :
+* build js/css/font/img... assets :
 ```
 yarn build
 ```

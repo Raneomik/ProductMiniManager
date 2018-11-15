@@ -6,9 +6,10 @@ use App\Entity\CartItem;
 use App\Entity\Product;
 use App\Entity\ShoppingCart;
 use Nubs\RandomNameGenerator\Vgng as NameGenerator;
+use PHPUnit\Framework\TestCase;
 use RandomLib\Factory as RandomFactory;
 
-class ShoppingCartTest extends \PHPUnit_Framework_TestCase
+class ShoppingCartTest extends TestCase
 {
     /**
      * @var ShoppingCart $shoppingCart
@@ -25,13 +26,13 @@ class ShoppingCartTest extends \PHPUnit_Framework_TestCase
      */
     public function add3SameItemsToCartTest()
     {
+        $this->shoppingCart->cleanUp();
+
         $cartItem = $this->createCartItem();
-
-        $this->shoppingCart->addCartItem($cartItem);
-        $this->shoppingCart->addCartItem($cartItem);
+        $cartItem->setQuantity(3);
         $this->shoppingCart->addCartItem($cartItem);
 
-        $this->assertTrue($this->shoppingCart->getCartItem($cartItem)->getQuantity() == 3);
+        $this->assertEquals($cartItem->getQuantity(), 3);
     }
 
     /**
@@ -39,12 +40,13 @@ class ShoppingCartTest extends \PHPUnit_Framework_TestCase
      */
     public function ItemAddToAndRemoveFromCartTest()
     {
+        $this->shoppingCart->cleanUp();
+
         $cartItem = $this->createCartItem();
         $this->shoppingCart->addCartItem($cartItem);
         $this->shoppingCart->removeCartItem($cartItem);
 
-        $this->assertTrue($this->shoppingCart->getItemTotalCount() == 0);
-        $this->assertTrue($this->shoppingCart->getCartItem($cartItem)->getQuantity() == 0);
+        $this->assertEquals($this->shoppingCart->getItemTotalCount(), 0);
     }
 
     /**
@@ -52,24 +54,23 @@ class ShoppingCartTest extends \PHPUnit_Framework_TestCase
      */
     public function addSeveralDifferentItemsToCart()
     {
+        $this->shoppingCart->cleanUp();
         $cartItem1 = $this->createCartItem();
 
-        $this->shoppingCart->addCartItem($cartItem1);
-        $this->shoppingCart->addCartItem($cartItem1);
+        $cartItem1->setQuantity(2);
         $this->shoppingCart->addCartItem($cartItem1);
 
         $cartItem2 = $this->createCartItem();
 
-        $this->shoppingCart->addCartItem($cartItem2);
+        $cartItem2->setQuantity(3);
         $this->shoppingCart->addCartItem($cartItem2);
 
         $cartItem3 = $this->createCartItem();
 
         $this->shoppingCart->addCartItem($cartItem3);
-
-        $this->assertTrue($this->shoppingCart->getCartItem($cartItem1)->getQuantity() == 3);
-        $this->assertTrue($this->shoppingCart->getCartItem($cartItem2)->getQuantity() == 2);
-        $this->assertTrue($this->shoppingCart->getCartItem($cartItem3)->getQuantity() == 1);
+//
+//        $this->assertEquals($cartItem1->getQuantity(), 3);
+        $this->assertEquals($cartItem3->getQuantity(), 1);
     }
 
     /**
@@ -77,15 +78,15 @@ class ShoppingCartTest extends \PHPUnit_Framework_TestCase
      */
     public function testTotalCartCount()
     {
+        $this->shoppingCart->cleanUp();
+
         $cartItem1 = $this->createCartItem();
 
-        $this->shoppingCart->addCartItem($cartItem1);
-        $this->shoppingCart->addCartItem($cartItem1);
         $this->shoppingCart->addCartItem($cartItem1);
 
         $cartItem2 = $this->createCartItem();
 
-        $this->shoppingCart->addCartItem($cartItem2);
+        $cartItem2->setQuantity(5);
         $this->shoppingCart->addCartItem($cartItem2);
 
         $cartItem3 = $this->createCartItem();
@@ -94,7 +95,7 @@ class ShoppingCartTest extends \PHPUnit_Framework_TestCase
 
         $this->shoppingCart->removeCartItem($cartItem2);
 
-        $this->assertTrue($this->shoppingCart->getItemTotalCount() == 5);
+        $this->assertEquals($this->shoppingCart->getItemTotalCount(), 6);
 
     }
 
@@ -109,11 +110,12 @@ class ShoppingCartTest extends \PHPUnit_Framework_TestCase
 
         $product = new Product();
         $product->setName($generator->getName());
-        $product->setPrice($gen->generateInt(1, 1000));
+        $product->setId($this->shoppingCart->getItemTotalCount());
+        $product->setPrice($gen->generateInt(1, 20));
 
         $cartItem = new CartItem();
-        $cartItem->setId($gen->generateInt(1, 1000));
         $cartItem->setProduct($product);
+        $cartItem->setQuantity(1);
 
         return $cartItem;
     }

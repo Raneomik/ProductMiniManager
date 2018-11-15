@@ -6,24 +6,26 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "ircmaxell/random-lib": "^1.2",
         "nubs/random-name-generator": "^2.1",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "^4.1",
         "symfony/flex": "^1.0",
+        "symfony/form": "^4.1",
         "symfony/framework-bundle": "^4.1",
         "symfony/orm-pack": "^1.0",
+        "symfony/phpunit-bridge": "^4.1",
         "symfony/test-pack": "^1.0",
         "symfony/translation": "^4.1",
         "symfony/twig-bundle": "^4.1",
+        "symfony/validator": "^4.1",
         "symfony/webpack-encore-bundle": "^1.0",
         "symfony/yaml": "^4.1"
     },
     "require-dev": {
+        "knpuniversity/lorem-ipsum-bundle": "^1.0",
         "sensiolabs/security-checker": "^5.0",
         "symfony/dotenv": "^4.1",
-        "symfony/maker-bundle": "^1.9",
-        "symfony/phpunit-bridge": "^4.1"
+        "symfony/maker-bundle": "^1.9"
     },
     "config": {
         "preferred-install": {

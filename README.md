@@ -10,6 +10,8 @@ Symfony 4 / Docker training project
 
 ### Start app
 
+_(elements between '[]' may be required, dependant on your environment set up)_
+
 * Install dependencies:
 
 ```
@@ -20,19 +22,19 @@ yarn
 
 * start docker php 7 server :
 ```
-sudo docker-compose up -d --force-recreate --remove-orphans
+[sudo] docker-compose up -d
 ```
 
 get containers IP address (if you want to access it by navigator or setup a host):
 ```
-sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' product-manager-srv
+[sudo] docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' product-manager-srv
 ```
 
 
 * init and populate db :
 ```
-sudo docker exec -it product-manager-srv bin/console doctrine:schema:update --force
-sudo docker exec -it product-manager-srv bin/console doctrine:fixtures:load
+[sudo] docker exec -it product-manager-srv bin/console doctrine:schema:update --force
+[sudo] docker exec -it product-manager-srv bin/console doctrine:fixtures:load
 ```
 
 * build js/css/font/img... assets :
@@ -42,6 +44,6 @@ yarn build
 
 * run tests:
 ```
-sudo docker exec -it product-manager-srv bin/phpunit
+[sudo] docker exec -it product-manager-srv bin/phpunit
 ```
 

@@ -33,40 +33,40 @@ class SessionCartManager
     }
 
 
-    public function updateCart(Product $product, int $quantity = 1)
+    public function updateCart(Product $product, int $quantity = 1) : void
     {
         $cartItem = $this->getCartItemForProduct($product);
         $this->sessionCart->updateCartItem($cartItem, $quantity);
         $this->updateSessionCart();
     }
 
-    public function removeFromCart(Product $product, int $quantity = 1)
+    public function removeFromCart(Product $product, int $quantity = 1) : void
     {
         $cartItem = $this->getCartItemForProduct($product);
         $this->sessionCart->removeCartItem($cartItem, $quantity);
         $this->updateSessionCart();
     }
 
-    public function updateItemInCart(CartItem $item)
+    public function updateItemInCart(CartItem $item) : void
     {
         $this->sessionCart->updateCartItem($item);
         $this->updateSessionCart();
     }
 
-    public function removeItemFromCart(CartItem $item)
+    public function removeItemFromCart(CartItem $item) : void
     {
         $this->sessionCart->removeCartItem($item);
         $this->updateSessionCart();
     }
 
-    public function cleanUpCart()
+    public function cleanUpCart() : void
     {
         $this->sessionCart->cleanUp();
         $this->updateSessionCart();
     }
 
 
-    public function getCartTotalPrice()
+    public function getCartTotalPrice() : float
     {
         return $this->getSessionCart()->getTotalPrice();
     }
@@ -76,7 +76,7 @@ class SessionCartManager
         return $this->session->get(self::SHOPPING_CART_SESSION_VARNAME);
     }
 
-    private function updateSessionCart()
+    private function updateSessionCart() : void
     {
         if ($this->session->has(self::SHOPPING_CART_SESSION_VARNAME)) {
             $this->sessionCart = $this->session->get(self::SHOPPING_CART_SESSION_VARNAME);
@@ -100,14 +100,6 @@ class SessionCartManager
         }
 
         return $foundCartItem;
-    }
-
-    /**
-     * @param SessionInterface $session
-     */
-    public function setSession($session)
-    {
-        $this->session = $session;
     }
 
 }

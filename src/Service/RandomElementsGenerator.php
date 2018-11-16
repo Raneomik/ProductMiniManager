@@ -35,9 +35,11 @@ class RandomElementsGenerator
     }
 
 
-    public function getRandomFloat($st_num=0,$end_num=1) : float
+    public function getRandomFloat(int $st_num=0, int $end_num=1, int $divider = 100) : float
     {
-        return number_format((float)rand($st_num , $end_num), 2);
+        $st_num *= $divider;
+        $end_num *= $divider;
+        return number_format((float)rand($st_num , $end_num) / $divider, 2);
     }
 
 }

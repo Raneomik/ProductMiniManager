@@ -1,3 +1,10 @@
-controllers:
+localized_controllers:
     resource: ../../src/Controller/
+    type: annotation
+    prefix:
+        en : ''
+        fr : '/fr'
+
+api_controllers:
+    resource: ../../src/Controller/Api/
     type: annotation

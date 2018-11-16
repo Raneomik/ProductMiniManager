@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
+use App\Service\RandomElementsGenerator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use KnpU\LoremIpsumBundle\KnpUIpsum;
@@ -11,32 +12,23 @@ use Nubs\RandomNameGenerator\Vgng as NameGenerator;
 class ProductFixtures extends Fixture
 {
 
-    private $nameGenerator;
+    private $randomGenerator;
 
-    private $descriptionGenerator;
-
-    public function __construct(KnpUIpsum $knpUIpsum)
+    public function __construct(RandomElementsGenerator $randomGenerator)
     {
-        $this->descriptionGenerator = $knpUIpsum;
-        $this->nameGenerator = new NameGenerator;
+        $this->randomGenerator = $randomGenerator;
     }
 
     public function load(ObjectManager $manager) {
-        $randomFactory = new RandomFactory;
-
         for ($i = 0; $i < 12; $i++) {
             $product = new Product;
-            $product->setName($this->nameGenerator->getName());
-            $product->setDescription($this->descriptionGenerator->getParagraphs());
-            $product->setPrice($this->randomFloat(5,500));
+            $product->setName($this->randomGenerator->getRandomName());
+            $product->setDescription($this->randomGenerator->getRandomLoremIpsumParagraph());
+            $product->setPrice($this->randomGenerator->getRandomFloat(5,250));
             $manager->persist($product);
         }
 
         $manager->flush();
     }
 
-    private function randomFloat($st_num=0,$end_num=1,$mul=100000) : float
-    {
-        return number_format((float)rand($st_num , $end_num), 2);
-    }
 }

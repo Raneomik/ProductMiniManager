@@ -22,8 +22,7 @@ product:
   list: Product List
   name: Product Name
   price: Price
-
-
+  quantity: Quantity
 
 return: Return
 see_details: See details

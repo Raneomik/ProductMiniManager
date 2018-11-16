@@ -1,0 +1,29 @@
+
+cart:
+  add: Ajouter au panier
+  remove: Supprimer du panier
+  remove.one: Supprimer un élément du panier
+  name: Mon panier
+  clean: Vider le panier
+
+currency:
+  name: Devise
+  symbol:
+    dollar: $
+    euro: €
+    pound: £
+
+home: Home
+
+product:
+  description: Description
+  entity: Produit
+  id: id
+  list: Liste de produits
+  name: Nom du produit
+  price: Prix
+  quantity: Quantité
+
+
+return: Retour
+see_details: Voir détails

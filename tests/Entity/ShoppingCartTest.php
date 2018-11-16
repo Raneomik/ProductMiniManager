@@ -104,14 +104,12 @@ class ShoppingCartTest extends TestCase
      */
     private function createCartItem() : CartItem
     {
-        $randomFactory = new RandomFactory;
         $generator     = new NameGenerator;
-        $gen           = $randomFactory->getMediumStrengthGenerator();
 
         $product = new Product();
         $product->setName($generator->getName());
         $product->setId($this->shoppingCart->getItemTotalCount());
-        $product->setPrice($gen->generateInt(1, 20));
+        $product->setPrice($this->randomFloat(1, 20));
 
         $cartItem = new CartItem();
         $cartItem->setProduct($product);
@@ -120,4 +118,8 @@ class ShoppingCartTest extends TestCase
         return $cartItem;
     }
 
+    private function randomFloat($st_num=0,$end_num=1) : float
+    {
+        return number_format((float)rand($st_num , $end_num), 2);
+    }
 }

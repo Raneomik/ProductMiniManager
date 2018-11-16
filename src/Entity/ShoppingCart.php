@@ -39,12 +39,14 @@ class ShoppingCart
     {
         $oldCartItem = $this->getCartItem($cartItem);
         $newSum = $oldCartItem->getQuantity() + $cartItem->getQuantity();
-        if($newSum > 0) {
-            $cartItem->setQuantity($newSum);
-            $this->cartItems->set($cartItem->getId(), $cartItem);
-        } else {
+
+        if($newSum <= 0) {
             $this->cartItems->removeElement($cartItem);
+            return $this;
         }
+
+        $cartItem->setQuantity($newSum);
+        $this->cartItems->set($cartItem->getId(), $cartItem);
 
         return $this;
     }

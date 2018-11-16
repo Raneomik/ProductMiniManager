@@ -29,13 +29,7 @@ class SessionCartManager
     public function __construct(SessionInterface $session)
     {
         $this->session = $session;
-
-        if ($this->session->has(self::SHOPPING_CART_SESSION_VARNAME)) {
-            $this->sessionCart = $this->session->get(self::SHOPPING_CART_SESSION_VARNAME);
-        } else {
-            $this->sessionCart = new ShoppingCart;
-            $this->session->set(self::SHOPPING_CART_SESSION_VARNAME, $this->sessionCart);
-        }
+        $this->updateSessionCart();
     }
 
 
@@ -79,6 +73,9 @@ class SessionCartManager
     private function updateSessionCart()
     {
         if ($this->session->has(self::SHOPPING_CART_SESSION_VARNAME)) {
+            $this->sessionCart = $this->session->get(self::SHOPPING_CART_SESSION_VARNAME);
+        } else {
+            $this->sessionCart = new ShoppingCart;
             $this->session->set(self::SHOPPING_CART_SESSION_VARNAME, $this->sessionCart);
         }
     }

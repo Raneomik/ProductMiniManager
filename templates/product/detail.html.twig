@@ -4,9 +4,15 @@
 
     <h2 class="text-center">{{ product.name }} <i class="small">({{ 'product.id'|trans ~ ' : ' ~ product.id }})</i></h2>
 
-    <h3>{{ 'product.price'|trans }} : {{ product.price|number_format(2) }} {{ 'currency.symbol.euro'|trans }}</h3>
-        {{ form(AddToCartForm, { 'action' : path('shopping_cart_add')}) }}
-    <h4>{{ 'product.description'|trans }} :</h4>
-    <p>{{ product.description }}</p>
+    <div class="row">
+        <div class="col-sm-8">
+            <p><strong>{{ 'product.price'|trans }} :</strong> {{ product.price|number_format(2) }} {{ 'currency.symbol.euro'|trans }}</p>
 
+            <label><strong>{{ 'product.description'|trans }} :</strong></label>
+            <p>{{ product.description }}</p>
+        </div>
+        <div class="col-sm-4">
+            {{ form(AddToCartForm, { 'action' : path('shopping_cart_add')}) }}
+        </div>
+    </div>
 {% endblock %}

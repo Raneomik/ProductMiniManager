@@ -11,7 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * Class ProductController
+ * @package App\Controller
+ */
 class ProductController extends AbstractController
 {
     /**
@@ -19,7 +22,7 @@ class ProductController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      */
-    public function index(SessionCartManager $sessionCartManager) : Response
+    public function index() : Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $products      = $entityManager->getRepository(Product::class)->findBy([], ['name' => 'ASC']);
@@ -34,6 +37,8 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/product/{id}", name="product_detail")
+     * @param Product $product
+     * @return Response
      */
     public function detail(Product $product) : Response
     {
@@ -44,8 +49,8 @@ class ProductController extends AbstractController
         return $this->render(
             'product/detail.html.twig',
             [
-                'product' => $product,
-                'AddToCartForm' => $form->createView()
+                'product'       => $product,
+                'AddToCartForm' => $form->createView(),
             ]
         );
     }

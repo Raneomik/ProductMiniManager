@@ -65,6 +65,12 @@ class SessionCartManager
         $this->updateSessionCart();
     }
 
+
+    public function getCartTotalPrice()
+    {
+        return $this->getSessionCart()->getTotalPrice();
+    }
+
     public function getSessionCart() : ShoppingCart
     {
         return $this->session->get(self::SHOPPING_CART_SESSION_VARNAME);
@@ -84,6 +90,8 @@ class SessionCartManager
     {
         $foundCartItem = new CartItem;
         $foundCartItem->setProduct($product);
+        $foundCartItem->setQuantity(1);
+        
         foreach ($this->sessionCart->getCartItems() as $cartItem){
             if($cartItem->getId() === $product->getId()){
                 $foundCartItem = $cartItem;
@@ -93,4 +101,13 @@ class SessionCartManager
 
         return $foundCartItem;
     }
+
+    /**
+     * @param SessionInterface $session
+     */
+    public function setSession($session)
+    {
+        $this->session = $session;
+    }
+
 }

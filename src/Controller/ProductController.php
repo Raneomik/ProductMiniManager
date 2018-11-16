@@ -36,7 +36,10 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/{id}", name="product_detail")
+     * @Route({
+     *     "en": "/product/{id}",
+     *     "fr": "/produit/{id}"
+     * }, name="product_detail")
      * @param Product $product
      * @return Response
      */

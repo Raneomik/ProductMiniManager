@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "77ef0535f1b6eed56e40aeabdd22e1bb",
+    "content-hash": "212c95b71638a63c2217a01471e9abea",
     "packages": [
         {
             "name": "dama/doctrine-test-bundle",

@@ -3,16 +3,32 @@
 {% block title %}Shopping Cart{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">{{ 'cart.name'|trans }}</h1>
-    <ul>
-    {% for product_item in product_items %}
-        <li>{{ product_item.product.name }} ({{ product_item.quantity }} : {{ product_item.totalPrice ~ 'currency.symbol.euro'|trans }})
-            <a href="{{ path('product_detail', {'id': product_item.product.id}) }}">{{ 'see_details'|trans }}</a>
-            <a href="{{ path('shopping_cart_remove', {'id': product_item.product.id}) }}">{{ 'cart.remove.one'|trans }}</a>
-        </li>
-    {% endfor %}
-    </ul>
 
-    <a href="{{ path('shopping_cart_clean') }}"><i class="fa fa-trash fa-2x float-right" aria-hidden="true"></i></a>
+    <h1 class="text-center m-3">{{ 'cart.name'|trans }}</h1>
+
+    <div class="clearfix">
+        <ul>
+        {% for product_item in product_items %}
+            <li>{{ product_item.product.name }} ({{ 'product.quantity'|trans }} : {{ product_item.quantity }} )
+                <a href="{{ path('product_detail', {'id': product_item.product.id}) }}">{{ 'see_details'|trans }}</a>
+                <a class="btn btn-default btn-sm text-right" href="{{ path('shopping_cart_remove', {'id': product_item.product.id}) }}">
+                    <i class="fa fa-minus"></i> {{ 'cart.remove.one'|trans }}
+                </a>
+            </li>
+
+        {% endfor %}
+        </ul>
+
+        {% if product_items|length %}
+            <label>{{ 'cart.total'|trans }} : <strong>{{ total_price ~ 'currency.symbol.euro'|trans }}</strong></label>
+
+            <div class="float-right">
+                <a class="btn btn-danger" href="{{ path('shopping_cart_clean') }}">
+                    <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
+                    <strong>{{ 'cart.clean'|trans }}</strong>
+                </a>
+            </div>
+        {% endif %}
+    </div>
 
 {% endblock %}

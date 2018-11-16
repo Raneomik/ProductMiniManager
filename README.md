@@ -10,8 +10,6 @@ Symfony 4 / Docker training project
 
 ### Start app
 
-_(elements between '[]' may be required, dependant on your environment set up)_
-
 * Install dependencies:
 
 ```
@@ -42,8 +40,8 @@ sudo docker exec product-manager-srv bin/console doctrine:fixtures:load
 yarn build
 ```
 
-* run tests:
+* run tests :
 ```
-[sudo] docker exec product-manager-srv bin/phpunit
+sudo docker exec product-manager-srv bin/phpunit
 ```
 

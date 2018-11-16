@@ -5,6 +5,12 @@ cart:
   remove.one: Remove one from cart
   name: Shopping cart
   clean: Remove all
+  empty: Shopping cart is empty
+  total : Total
+  success :
+    add: Product added to cart successfully !
+    remove: Product removed
+    cleanup: Shopping cart emptied !
 
 currency:
   name: Currency

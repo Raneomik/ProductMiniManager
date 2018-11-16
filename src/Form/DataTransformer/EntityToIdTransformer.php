@@ -21,7 +21,6 @@ class EntityToIdTransformer implements DataTransformerInterface
     /**
      * @param ManagerRegistry $registry
      * @param string          $class
-     * @param string          $property
      * @param bool            $multiple
      */
     public function __construct(ManagerRegistry $registry, string $class, bool $multiple = false)
@@ -38,7 +37,6 @@ class EntityToIdTransformer implements DataTransformerInterface
         if (null === $entity) {
             return null;
         }
-        $accessor = PropertyAccess::createPropertyAccessor();
         if ($this->multiple && \is_array($entity)) {
             $value = [];
             foreach ($entity as $e) {
@@ -60,11 +58,11 @@ class EntityToIdTransformer implements DataTransformerInterface
         }
         if ($this->multiple) {
             $ids = explode(',', $id);
-            $result = $this->getRepository()->findBy(['id' => $ids]);
+            $result = $this->getRepository()->findBy(['id' => $ids] );
         } else {
             $result = $this->getRepository()->findOneBy(['id' => $id]);
             if (null === $result) {
-                throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $this->class, $this->property, $id));
+                throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" id = "%s".', $this->class, $id));
             }
         }
         return $result;

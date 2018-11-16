@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class CartItem
 {
@@ -15,6 +16,10 @@ class CartItem
     private $product;
 
     /**
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      * @var int quantity
      */
     private $quantity;

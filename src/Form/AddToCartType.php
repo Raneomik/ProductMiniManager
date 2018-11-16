@@ -4,13 +4,10 @@ namespace App\Form;
 
 use App\Entity\CartItem;
 use App\Entity\Product;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddToCartType extends AbstractType
@@ -20,11 +17,11 @@ class AddToCartType extends AbstractType
         $builder
             ->add(
                 'quantity',
-                NumberType::class,
+                IntegerType::class,
                 [
                     'label' => false,
                     'attr'  => [
-                        'class' => 'col-sm-6',
+                        'class' => 'w-50',
                     ],
                 ]
             )
@@ -41,7 +38,7 @@ class AddToCartType extends AbstractType
                 [
                     'label' => 'cart.add',
                     'attr'  => [
-                        'class' => 'col-sm-6',
+                        'class' => 'w-50',
                     ],
                 ]
             );

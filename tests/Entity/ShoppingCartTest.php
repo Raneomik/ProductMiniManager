@@ -55,22 +55,19 @@ class ShoppingCartTest extends TestCase
     public function addSeveralDifferentItemsToCart()
     {
         $this->shoppingCart->cleanUp();
-        $cartItem1 = $this->createCartItem();
 
+        $cartItem1 = $this->createCartItem();
         $cartItem1->setQuantity(2);
-        $this->shoppingCart->updateCartItem($cartItem1);
+        $this->shoppingCart->updateCartItem($cartItem1); // +2
 
         $cartItem2 = $this->createCartItem();
-
         $cartItem2->setQuantity(3);
-        $this->shoppingCart->updateCartItem($cartItem2);
+        $this->shoppingCart->updateCartItem($cartItem2); // +3
 
         $cartItem3 = $this->createCartItem();
+        $this->shoppingCart->updateCartItem($cartItem3); // +1
 
-        $this->shoppingCart->updateCartItem($cartItem3);
-//
-//        $this->assertEquals($cartItem1->getQuantity(), 3);
-        $this->assertEquals($cartItem3->getQuantity(), 1);
+        $this->assertEquals($this->shoppingCart->getItemTotalCount(), 6);
     }
 
     /**
@@ -81,22 +78,46 @@ class ShoppingCartTest extends TestCase
         $this->shoppingCart->cleanUp();
 
         $cartItem1 = $this->createCartItem();
-
         $this->shoppingCart->updateCartItem($cartItem1);
 
         $cartItem2 = $this->createCartItem();
-
         $cartItem2->setQuantity(5);
         $this->shoppingCart->updateCartItem($cartItem2);
 
         $cartItem3 = $this->createCartItem();
-
         $this->shoppingCart->updateCartItem($cartItem3);
 
         $this->shoppingCart->removeCartItem($cartItem2);
 
         $this->assertEquals($this->shoppingCart->getItemTotalCount(), 6);
+    }
 
+    /**
+     * @test
+     */
+    public function testTotalCartPrice()
+    {
+        $this->shoppingCart->cleanUp();
+
+        $totalExpected = 0;
+
+        $cartItem1 = $this->createCartItem();
+        $this->shoppingCart->updateCartItem($cartItem1);
+        $totalExpected += $cartItem1->getProduct()->getPrice();
+
+        $cartItem2 = $this->createCartItem();
+        $cartItem2->setQuantity(5);
+        $this->shoppingCart->updateCartItem($cartItem2);
+        $totalExpected += 5 * $cartItem2->getProduct()->getPrice();
+
+        $cartItem3 = $this->createCartItem();
+        $this->shoppingCart->updateCartItem($cartItem3);
+        $totalExpected += $cartItem3->getProduct()->getPrice();
+
+        $this->shoppingCart->removeCartItem($cartItem2);
+        $totalExpected -= $cartItem2->getProduct()->getPrice();
+
+        $this->assertEquals($this->shoppingCart->getTotalPrice(), $totalExpected);
     }
 
     /**

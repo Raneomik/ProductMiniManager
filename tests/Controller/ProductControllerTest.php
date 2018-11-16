@@ -20,7 +20,7 @@ class ProductControllerTest extends WebTestCase
     /**
      * @test
      */
-    public function controllerResponse()
+    public function testControllerResponse()
     {
         $translator = self::$container->get('translator');
 
@@ -32,18 +32,31 @@ class ProductControllerTest extends WebTestCase
     }
 
     /**
+     * @test
      */
-    public function translations()
+    public function testHomeTranslations()
     {
         $translator = self::$container->get('translator');
 
-        $client  = static::createClient();
+        $client         = static::createClient();
         $englishCrawler = $client->request('GET', '/');
-        $frenchCrawler = $client->request('GET', '/fr/');
+        $frenchCrawler  = $client->request('GET', '/fr/');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertContains($translator->trans('product.list' ), $englishCrawler->filter('h1')->text());
-        $this->assertContains($translator->trans('product.list', [], null, 'fr' ), $frenchCrawler->filter('h1')->text());
+        $this->assertContains($translator->trans('product.list', [], null, 'en'), $englishCrawler->filter('h1')->text());
+        $this->assertContains($translator->trans('product.list', [], null, 'fr'), $frenchCrawler->filter('h1')->text());
     }
+
+    /**
+     * @test
+     */
+    public function testProductCount()
+    {
+        $client  = static::createClient();
+        $crawler = $client->request('GET', '/');
+
+        $this->assertEquals($crawler->filter('[id^="product-"]')->count(), 12);
+        $this->assertEquals($crawler->filter('.product')->count(), 12);
+    }
+
 
 }

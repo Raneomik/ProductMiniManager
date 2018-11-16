@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="text-center">{{ 'product.list'|trans }}</h1>
+    <h1 class="text-center m-3">{{ 'product.list'|trans }}</h1>
+    <div class="product-container">
         {% for product in products %}
             {% if loop.index0 % 3 == 0 %}
                 <div class="row">
             {% endif %}
-            <div class="col-sm-4 border-0 rounded text-center">
+            <div id="{{ 'product-' ~ product.id }}" class="col-sm-4 border rounded text-center p-4 product">
                 <div>{{ product.name }}</div>
                 <a href="{{ path('product_detail', {'id': product.id}) }}">{{ 'see_details'|trans }}</a><br/>
             </div>
@@ -14,5 +15,5 @@
                 </div>
             {% endif %}
         {% endfor %}
-
+    </div>
 {% endblock %}

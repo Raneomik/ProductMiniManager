@@ -5,6 +5,12 @@ cart:
   remove.one: Supprimer un élément du panier
   name: Mon panier
   clean: Vider le panier
+  empty: Le panier est vide
+  total : Total
+  success :
+    add: Produit ajouté avec succés !
+    remove : Produit enlevé
+    cleanup: Panier vidé !
 
 currency:
   name: Devise

@@ -37,11 +37,11 @@ class SessionCartManagerTest extends KernelTestCase
         foreach ($products as $product) {
             $cartItem = new CartItem();
             $cartItem->setProduct($product);
-            $cartItem->setQuantity(1);
+            $cartItem->setQuantity(2);
             $this->cartManager->updateItemInCart($cartItem);
         }
 
-        $this->assertEquals($this->cartManager->getSessionCart()->getItemTotalCount(), 12);
+        $this->assertEquals($this->cartManager->getSessionCart()->getItemTotalCount(), 24);
     }
 
     public function testSessionCartProductAddition()

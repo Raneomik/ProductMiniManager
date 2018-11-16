@@ -125,7 +125,7 @@ class ShoppingCartTest extends TestCase
      */
     private function createCartItem() : CartItem
     {
-        $generator     = new NameGenerator;
+        $generator = new NameGenerator;
 
         $product = new Product();
         $product->setName($generator->getName());
@@ -139,8 +139,8 @@ class ShoppingCartTest extends TestCase
         return $cartItem;
     }
 
-    private function randomFloat($st_num=0,$end_num=1) : float
+    private function randomFloat($st_num = 0, $end_num = 1) : float
     {
-        return number_format((float)rand($st_num , $end_num), 2);
+        return number_format((float)rand($st_num, $end_num), 2);
     }
 }

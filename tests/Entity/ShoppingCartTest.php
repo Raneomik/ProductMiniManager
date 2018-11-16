@@ -30,7 +30,7 @@ class ShoppingCartTest extends TestCase
 
         $cartItem = $this->createCartItem();
         $cartItem->setQuantity(3);
-        $this->shoppingCart->addCartItem($cartItem);
+        $this->shoppingCart->updateCartItem($cartItem);
 
         $this->assertEquals($cartItem->getQuantity(), 3);
     }
@@ -43,7 +43,7 @@ class ShoppingCartTest extends TestCase
         $this->shoppingCart->cleanUp();
 
         $cartItem = $this->createCartItem();
-        $this->shoppingCart->addCartItem($cartItem);
+        $this->shoppingCart->updateCartItem($cartItem);
         $this->shoppingCart->removeCartItem($cartItem);
 
         $this->assertEquals($this->shoppingCart->getItemTotalCount(), 0);
@@ -58,16 +58,16 @@ class ShoppingCartTest extends TestCase
         $cartItem1 = $this->createCartItem();
 
         $cartItem1->setQuantity(2);
-        $this->shoppingCart->addCartItem($cartItem1);
+        $this->shoppingCart->updateCartItem($cartItem1);
 
         $cartItem2 = $this->createCartItem();
 
         $cartItem2->setQuantity(3);
-        $this->shoppingCart->addCartItem($cartItem2);
+        $this->shoppingCart->updateCartItem($cartItem2);
 
         $cartItem3 = $this->createCartItem();
 
-        $this->shoppingCart->addCartItem($cartItem3);
+        $this->shoppingCart->updateCartItem($cartItem3);
 //
 //        $this->assertEquals($cartItem1->getQuantity(), 3);
         $this->assertEquals($cartItem3->getQuantity(), 1);
@@ -82,16 +82,16 @@ class ShoppingCartTest extends TestCase
 
         $cartItem1 = $this->createCartItem();
 
-        $this->shoppingCart->addCartItem($cartItem1);
+        $this->shoppingCart->updateCartItem($cartItem1);
 
         $cartItem2 = $this->createCartItem();
 
         $cartItem2->setQuantity(5);
-        $this->shoppingCart->addCartItem($cartItem2);
+        $this->shoppingCart->updateCartItem($cartItem2);
 
         $cartItem3 = $this->createCartItem();
 
-        $this->shoppingCart->addCartItem($cartItem3);
+        $this->shoppingCart->updateCartItem($cartItem3);
 
         $this->shoppingCart->removeCartItem($cartItem2);
 

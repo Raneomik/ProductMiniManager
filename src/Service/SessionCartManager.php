@@ -39,10 +39,10 @@ class SessionCartManager
     }
 
 
-    public function addToCart(Product $product, int $quantity = 1)
+    public function updateCart(Product $product, int $quantity = 1)
     {
         $cartItem = $this->getCartItemForProduct($product);
-        $this->sessionCart->addCartItem($cartItem, $quantity);
+        $this->sessionCart->updateCartItem($cartItem, $quantity);
         $this->updateSessionCart();
     }
 
@@ -53,9 +53,9 @@ class SessionCartManager
         $this->updateSessionCart();
     }
 
-    public function addItemToCart(CartItem $item)
+    public function updateItemInCart(CartItem $item)
     {
-        $this->sessionCart->addCartItem($item);
+        $this->sessionCart->updateCartItem($item);
         $this->updateSessionCart();
     }
 

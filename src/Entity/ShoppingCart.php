@@ -35,12 +35,12 @@ class ShoppingCart
         return $this->cartItems;
     }
 
-    public function addCartItem(CartItem $cartItem): self
+    public function updateCartItem(CartItem $cartItem): self
     {
         $oldCartItem = $this->getCartItem($cartItem);
         $newSum = $oldCartItem->getQuantity() + $cartItem->getQuantity();
-        if($newSum > 0){
-            $cartItem->setQuantity($newSum > 0 ? $newSum : 0);
+        if($newSum > 0) {
+            $cartItem->setQuantity($newSum);
             $this->cartItems->set($cartItem->getId(), $cartItem);
         } else {
             $this->cartItems->removeElement($cartItem);

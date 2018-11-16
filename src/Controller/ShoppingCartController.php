@@ -41,7 +41,7 @@ class ShoppingCartController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $cartItem = $form->getData();
-            $cartMan->addItemToCart($cartItem);
+            $cartMan->updateItemInCart($cartItem);
 
             return $this->redirectToRoute('shopping_cart');
         }
@@ -52,9 +52,9 @@ class ShoppingCartController extends AbstractController
     /**
      * @Route("/remove-product/{id}", name="shopping_cart_remove")
      */
-    public function removeProduct(SessionCartManager $cartMan, Product $product) : Response
+    public function removeProduct(SessionCartManager $cartMananager, Product $product) : Response
     {
-        $cartMan->removeFromCart($product);
+        $cartMananager->removeFromCart($product);
 
         return $this->redirectToRoute('shopping_cart');
     }

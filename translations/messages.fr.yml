@@ -29,7 +29,7 @@ product:
   name: Nom du produit
   price: Prix
   quantity: Quantité
+  see.details : Voir la fiche
 
 
 return: Retour
-see_details: Voir détails

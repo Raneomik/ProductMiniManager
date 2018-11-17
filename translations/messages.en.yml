@@ -1,4 +1,3 @@
-
 cart:
   add: Add to cart
   remove: Remove from cart
@@ -29,6 +28,6 @@ product:
   name: Product Name
   price: Price
   quantity: Quantity
+  see.details : See product details
 
 return: Return
-see_details: See details

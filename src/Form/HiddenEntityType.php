@@ -40,7 +40,7 @@ class HiddenEntityType extends AbstractType
     /**
      * @inheritDoc
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         $transformer = new EntityToIdTransformer($this->registry, $options['class'], $options['multiple']);
         $builder->addModelTransformer($transformer);
@@ -49,7 +49,7 @@ class HiddenEntityType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver) : void
     {
         $resolver->setRequired(['class']);
         $resolver->setDefaults([
@@ -65,7 +65,7 @@ class HiddenEntityType extends AbstractType
     /**
      * @inheritDoc
      */
-    public function getParent()
+    public function getParent() : string
     {
         return HiddenType::class;
     }
@@ -73,7 +73,7 @@ class HiddenEntityType extends AbstractType
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName() : string
     {
         return HiddenEntityType::class;
     }

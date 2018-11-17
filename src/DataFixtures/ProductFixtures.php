@@ -19,7 +19,8 @@ class ProductFixtures extends Fixture
         $this->randomGenerator = $randomGenerator;
     }
 
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager) : void
+    {
         for ($i = 0; $i < 12; $i++) {
             $product = new Product;
             $product->setName($this->randomGenerator->getRandomName());

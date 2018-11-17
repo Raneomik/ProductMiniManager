@@ -35,12 +35,12 @@ class AppExtension extends AbstractExtension
         ];
     }
 
-    public function getCartTotalItemsNumber()
+    public function getCartTotalItemsNumber() : int
     {
         return $this->sessionCartManager->getSessionCart()->getItemTotalCount();
     }
 
-    public function getAvailableLocales()
+    public function getAvailableLocales() : array
     {
         return $this->localeList;
     }

@@ -104,7 +104,7 @@ class ShoppingCart
         return $cartItem->getTotalPrice();
     }
 
-    public function cleanUp()
+    public function cleanUp() : void
     {
         $this->cartItems = new ArrayCollection();
     }

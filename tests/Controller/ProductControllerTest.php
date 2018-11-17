@@ -11,7 +11,7 @@ use Symfony\Component\Translation\Translator;
 class ProductControllerTest extends WebTestCase
 {
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         self::bootKernel();
@@ -20,7 +20,7 @@ class ProductControllerTest extends WebTestCase
     /**
      * @test
      */
-    public function testControllerResponse()
+    public function testControllerResponse() : void
     {
         $translator = self::$container->get('translator');
 
@@ -34,7 +34,7 @@ class ProductControllerTest extends WebTestCase
     /**
      * @test
      */
-    public function testHomeTranslations()
+    public function testHomeTranslations() : void
     {
         $translator = self::$container->get('translator');
 
@@ -49,7 +49,7 @@ class ProductControllerTest extends WebTestCase
     /**
      * @test
      */
-    public function testProductCount()
+    public function testProductCount() : void
     {
         $client  = static::createClient();
         $crawler = $client->request('GET', '/');
@@ -57,6 +57,4 @@ class ProductControllerTest extends WebTestCase
         $this->assertEquals($crawler->filter('[id^="product-"]')->count(), 12);
         $this->assertEquals($crawler->filter('.product')->count(), 12);
     }
-
-
 }

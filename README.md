@@ -3,14 +3,15 @@ Symfony 4 / Docker training project
 
 ### Requirements
 
+* PHP 7.1 (with ext curl, mbstring activated localy)
 * composer
-* node.js and yarn
+* node.js (min v8) and yarn (v10)
 * docker and docker-compose
 
 
 ### Start app
 
-* Install dependencies:
+* Install php and js dependencies:
 
 ```
 composer install -o
@@ -31,8 +32,8 @@ sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}
 
 * init and populate db :
 ```
-sudo docker exec product-manager-srv bin/console doctrine:schema:update --force
-sudo docker exec product-manager-srv bin/console doctrine:fixtures:load
+sudo docker exec product-manager-srv php bin/console doctrine:schema:update --force
+sudo docker exec product-manager-srv php bin/console doctrine:fixtures:load
 ```
 
 * build js/css/font/img... assets :

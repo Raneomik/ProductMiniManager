@@ -32,7 +32,10 @@ class SessionCartManager
         $this->updateSessionCart();
     }
 
-
+    /**
+     * @param Product $product
+     * @param int     $quantity
+     */
     public function updateCart(Product $product, int $quantity = 1) : void
     {
         $cartItem = $this->getCartItemForProduct($product);
@@ -40,6 +43,10 @@ class SessionCartManager
         $this->updateSessionCart();
     }
 
+    /**
+     * @param Product $product
+     * @param int     $quantity
+     */
     public function removeFromCart(Product $product, int $quantity = 1) : void
     {
         $cartItem = $this->getCartItemForProduct($product);
@@ -47,35 +54,52 @@ class SessionCartManager
         $this->updateSessionCart();
     }
 
+    /**
+     * @param CartItem $item
+     */
     public function updateItemInCart(CartItem $item) : void
     {
         $this->sessionCart->updateCartItem($item);
         $this->updateSessionCart();
     }
 
+    /**
+     * @param CartItem $item
+     */
     public function removeItemFromCart(CartItem $item) : void
     {
         $this->sessionCart->removeCartItem($item);
         $this->updateSessionCart();
     }
 
+    /**
+     * @return void
+     */
     public function cleanUpCart() : void
     {
         $this->sessionCart->cleanUp();
         $this->updateSessionCart();
     }
 
-
+    /**
+     * @return float
+     */
     public function getCartTotalPrice() : float
     {
         return $this->getSessionCart()->getTotalPrice();
     }
 
+    /**
+     * @return ShoppingCart
+     */
     public function getSessionCart() : ShoppingCart
     {
         return $this->session->get(self::SHOPPING_CART_SESSION_VARNAME);
     }
 
+    /**
+     * @return void
+     */
     private function updateSessionCart() : void
     {
         if ($this->session->has(self::SHOPPING_CART_SESSION_VARNAME)) {
@@ -85,7 +109,11 @@ class SessionCartManager
             $this->session->set(self::SHOPPING_CART_SESSION_VARNAME, $this->sessionCart);
         }
     }
-    
+
+    /**
+     * @param Product $product
+     * @return CartItem
+     */
     private function getCartItemForProduct(Product $product) : CartItem
     {
         $foundCartItem = new CartItem;

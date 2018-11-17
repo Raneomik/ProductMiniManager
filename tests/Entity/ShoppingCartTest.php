@@ -16,7 +16,7 @@ class ShoppingCartTest extends TestCase
      */
     private $shoppingCart;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->shoppingCart = new ShoppingCart;
     }
@@ -24,7 +24,7 @@ class ShoppingCartTest extends TestCase
     /**
      * @test
      */
-    public function add3SameItemsToCartTest()
+    public function test3SameItemsToCartAddition() : void
     {
         $this->shoppingCart->cleanUp();
 
@@ -38,7 +38,7 @@ class ShoppingCartTest extends TestCase
     /**
      * @test
      */
-    public function ItemAddToAndRemoveFromCartTest()
+    public function testItemToAndFromCartAdditionAndRemoval() : void
     {
         $this->shoppingCart->cleanUp();
 
@@ -52,7 +52,7 @@ class ShoppingCartTest extends TestCase
     /**
      * @test
      */
-    public function addSeveralDifferentItemsToCart()
+    public function testSeveralDifferentItemsToCartAddition() : void
     {
         $this->shoppingCart->cleanUp();
 
@@ -73,21 +73,21 @@ class ShoppingCartTest extends TestCase
     /**
      * @test
      */
-    public function testTotalCartCount()
+    public function testTotalCartCount() : void
     {
         $this->shoppingCart->cleanUp();
 
         $cartItem1 = $this->createCartItem();
-        $this->shoppingCart->updateCartItem($cartItem1);
+        $this->shoppingCart->updateCartItem($cartItem1); // +1
 
         $cartItem2 = $this->createCartItem();
         $cartItem2->setQuantity(5);
-        $this->shoppingCart->updateCartItem($cartItem2);
+        $this->shoppingCart->updateCartItem($cartItem2); // +5
 
         $cartItem3 = $this->createCartItem();
-        $this->shoppingCart->updateCartItem($cartItem3);
+        $this->shoppingCart->updateCartItem($cartItem3); // +1
 
-        $this->shoppingCart->removeCartItem($cartItem2);
+        $this->shoppingCart->removeCartItem($cartItem2); // -1
 
         $this->assertEquals($this->shoppingCart->getItemTotalCount(), 6);
     }
@@ -95,7 +95,7 @@ class ShoppingCartTest extends TestCase
     /**
      * @test
      */
-    public function testTotalCartPrice()
+    public function testTotalCartPrice() : void
     {
         $this->shoppingCart->cleanUp();
 

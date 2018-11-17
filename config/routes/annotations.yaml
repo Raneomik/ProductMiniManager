@@ -8,3 +8,4 @@ localized_controllers:
 api_controllers:
     resource: ../../src/Controller/Api/
     type: annotation
+    prefix: '/api'

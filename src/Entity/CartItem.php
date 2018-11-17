@@ -35,7 +35,7 @@ class CartItem
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id) : void
     {
         $this->id = $id;
     }
@@ -44,7 +44,7 @@ class CartItem
      * @return int
      *
      */
-    public function getId(): int
+    public function getId() : int
     {
         return $this->id;
     }
@@ -85,6 +85,9 @@ class CartItem
         return $this;
     }
 
+    /**
+     * @return float
+     */
     public function getTotalPrice() : float
     {
         return $this->product->getPrice() * $this->quantity;

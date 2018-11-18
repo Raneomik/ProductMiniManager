@@ -4,10 +4,9 @@ namespace DoctrineMigrations;
 
 use App\Entity\Product;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\DBAL\Migrations\Version;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -24,7 +23,7 @@ final class Version20181117164034 extends AbstractMigration implements Container
     private $objectManager;
 
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(ContainerInterface $container = null): void
     {
         $this->managerRegistry = $container->get('doctrine');
         $this->objectManager = $this->managerRegistry->getManager();
@@ -33,11 +32,12 @@ final class Version20181117164034 extends AbstractMigration implements Container
     public function up(Schema $schema) : void
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
+
         $this->addSql('ALTER TABLE product ADD COLUMN slug VARCHAR(255) NOT NULL COLLATE BINARY DEFAULT "";');
     }
 
 
-    public function postUp(Schema $schema)
+    public function postUp(Schema $schema): void
     {
         $productRepository =  $this->managerRegistry->getRepository(Product::class);
 
@@ -49,7 +49,7 @@ final class Version20181117164034 extends AbstractMigration implements Container
         $this->objectManager->flush();
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 

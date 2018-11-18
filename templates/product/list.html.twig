@@ -9,8 +9,7 @@
             {% endif %}
             <div id="{{ 'product-' ~ product.id }}" class="col-sm-4 border rounded text-center p-4 product">
                 <div>{{ product.name }}</div>
-                {{ dump(product.slug) }}
-                {#<a href="{{ path('product_detail', {'slug': product.slug}) }}">{{ 'product.see.details'|trans }}</a><br/>#}
+                <a href="{{ path('product_detail', {'slug': product.slug}) }}">{{ 'product.see.details'|trans }}</a><br/>
             </div>
             {% if loop.index % 3 == 0 %}
                 </div>

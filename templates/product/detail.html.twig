@@ -1,18 +1,25 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-
+    {% set has_image = product.imageName is not null %}
     <h1 class="text-center m-5">{{ product.name }} <i class="small">({{ 'product.id'|trans ~ ' : ' ~ product.id }})</i></h1>
 
     <div class="row">
-        <div class="col-sm-8">
-            <p><strong>{{ 'product.price'|trans }} :</strong> {{ product.price|number_format(2) }} {{ 'currency.symbol.euro'|trans }}</p>
-
-            <label><strong>{{ 'product.description'|trans }} :</strong></label>
-            <p>{{ product.description|raw }}</p>
-        </div>
         <div class="col-sm-4">
-            {{ form(AddToCartForm, { 'action' : path('shopping_cart_add')}) }}
+            {% if has_image %}
+                <img class="img-thumbnail rounded float-left detail-image" src="{{ vich_uploader_asset(product, 'imageFile') }}">
+            {% endif %}
+        </div>
+        <div class="{% if has_image %}col-sm-8{% endif %}">
+            <div>
+                <p><strong>{{ 'product.price'|trans }} :</strong> {{ product.price|number_format(2) }} {{ 'currency.symbol.euro'|trans }}</p>
+                <br/>
+                <p><strong>{{ 'product.description'|trans }} :</strong></p>
+                <p>{{ product.description|raw }}</p>
+            </div>
+            <div class="float-right">
+                {{ form(AddToCartForm, { 'action' : path('shopping_cart_add')}) }}
+            </div>
         </div>
     </div>
 {% endblock %}

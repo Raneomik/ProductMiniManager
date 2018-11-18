@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @Vich\Uploadable
  */
 class Product
 {
@@ -37,6 +40,19 @@ class Product
      * @ORM\Column(type="float")
      */
     private $price;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $imageName;
+
+    /**
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
+     * @var File
+     */
+    private $imageFile;
 
     public function getId(): ?int
     {
@@ -91,14 +107,32 @@ class Product
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function setImageFile(?File $imageFile) : self
     {
-        $this->price = $price;
+        $this->imageFile = $imageFile;
 
         return $this;
     }
 
-    public function __toString()
+    public function getImageFile() : ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName) : self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getImageName() : ?string
+    {
+        return $this->imageName;
+    }
+
+
+    public function __toString() : int
     {
         return $this->id;
     }

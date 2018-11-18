@@ -26,6 +26,7 @@ Product: Product
 product:
   description: Description
   entity: Product
+  image: Image
   id: id
   list: Product List
   name: Product Name

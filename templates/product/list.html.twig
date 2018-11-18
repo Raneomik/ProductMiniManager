@@ -8,6 +8,9 @@
                 <div class="row">
             {% endif %}
             <div id="{{ 'product-' ~ product.id }}" class="col-sm-4 border rounded text-center p-4 product">
+                {% if product.imageName is not null %}
+                    <img class="img-thumbnail float-left list-image m-2" src="{{ vich_uploader_asset(product, 'imageFile') }}">
+                {% endif %}
                 <div>{{ product.name }}</div>
                 <a href="{{ path('product_detail', {'slug': product.slug}) }}">{{ 'product.see.details'|trans }}</a><br/>
             </div>

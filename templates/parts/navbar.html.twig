@@ -8,21 +8,7 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    {{ current_locale }}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    {% for locale in available_locales() %}
-                        {% set localised_link = path(app.request.attributes.get('_route'),
-                                app.request.attributes.get('_route_params')|merge({ '_locale' : locale })
-                        ) %}
-                        <a class="dropdown-item {{ current_locale == locale ? 'active' : '' }}"
-                           href={{ localised_link }}>
-                            {{ locale }}
-                        </a>
-                    {% endfor %}
-                </div>
+                {% include 'parts/langswitcher.html.twig' with { 'class' : 'nav-link'} %}
             </li>
             <li class="nav-item">
                 <a class="nav-link" href={{ path('shopping_cart') }}>{{ 'cart.name'|trans }}

@@ -20,6 +20,8 @@ currency:
 
 home: Accueil
 
+
+Product: Produit
 product:
   description: Description
   entity: Produit
@@ -30,5 +32,13 @@ product:
   quantity: Quantité
   see.details : Voir la fiche
 
-
 return: Retour
+
+user:
+  logout:
+    success: Déconnecté avec succès !
+  login:
+    please: Merci de vous connecter
+    username: Nom d'utilisateur
+    password: Mot de passe
+    sign_in: Connexion

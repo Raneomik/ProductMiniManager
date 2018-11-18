@@ -15,7 +15,11 @@ final class Version20181113131531 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
+        $this->addSql('CREATE TEMPORARY TABLE __temp__product AS SELECT id, name, description, price, slug FROM product');
+        $this->addSql('DROP TABLE product');
         $this->addSql('CREATE TABLE product (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, price DOUBLE PRECISION NOT NULL)');
+        $this->addSql('INSERT INTO product (id, name, description, price) SELECT id, name, description, price FROM __temp__product');
+        $this->addSql('DROP TABLE __temp__product');
     }
 
     public function down(Schema $schema) : void

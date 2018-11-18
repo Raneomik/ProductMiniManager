@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
+{% block content %}
 
     <h1 class="text-center m-5">{{ product.name }} <i class="small">({{ 'product.id'|trans ~ ' : ' ~ product.id }})</i></h1>
 
@@ -9,7 +9,7 @@
             <p><strong>{{ 'product.price'|trans }} :</strong> {{ product.price|number_format(2) }} {{ 'currency.symbol.euro'|trans }}</p>
 
             <label><strong>{{ 'product.description'|trans }} :</strong></label>
-            <p>{{ product.description }}</p>
+            <p>{{ product.description|raw }}</p>
         </div>
         <div class="col-sm-4">
             {{ form(AddToCartForm, { 'action' : path('shopping_cart_add')}) }}

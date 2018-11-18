@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block header %}
+    {% include 'parts/navbar.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        {% include 'parts/flash.html.twig' %}
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}

@@ -20,6 +20,7 @@ currency:
 
 home: Home
 
+Product: Product
 product:
   description: Description
   entity: Product
@@ -31,3 +32,12 @@ product:
   see.details : See product details
 
 return: Return
+
+user:
+  logout:
+    success: Successfuly logged out !
+  login:
+    please: Please sign in
+    username: Username
+    password: Password
+    sign_in: Sign in

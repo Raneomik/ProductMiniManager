@@ -10,15 +10,8 @@
     {% endblock %}
 </head>
 <body>
-{% block header %}
-    {% set current_locale = app.request.attributes.get('_locale') %}
-    {% include 'parts/navbar.html.twig' with { 'current_locale' : current_locale } %}
-{% endblock %}
-<div class="container">
-    {% include 'parts/flash.html.twig' %}
-    {% block body %}{% endblock %}
-</div>
-
+{% block header %}{% endblock %}
+{% block body %}{% endblock %}
 {% block javascripts %}
     <script src="{{ asset('build/js/app.js') }}"></script>
     <script src="{{ asset('build/js/runtime.js') }}"></script>

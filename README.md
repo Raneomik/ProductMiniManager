@@ -5,7 +5,7 @@ Symfony 4 / Docker training project
 
 * PHP 7.1 (with ext curl, mbstring activated localy)
 * composer
-* node.js (min v8) and yarn (v10)
+* node.js (min v8) and yarn (v1)
 * docker and docker-compose
 
 

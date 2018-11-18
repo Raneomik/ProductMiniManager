@@ -29,7 +29,7 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     private $description;
 
@@ -38,7 +38,7 @@ class Product
      */
     private $price;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -57,12 +57,12 @@ class Product
         return $this;
     }
 
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -86,7 +86,7 @@ class Product
         return $this;
     }
 
-    public function getPrice(): float
+    public function getPrice(): ?float
     {
         return $this->price;
     }

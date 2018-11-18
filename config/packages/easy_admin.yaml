@@ -1,0 +1,21 @@
+easy_admin:
+    site_name: 'Product Mini Manager'
+    entities:
+        Product:
+            class: App\Entity\Product
+            new:
+                fields:
+                  - { property : name , label: 'product.name' }
+                  - { property : description , label: 'product.description', type: 'FOS\CKEditorBundle\Form\Type\CKEditorType'}
+                  - { property : price , label: 'product.price' }
+            edit:
+                fields:
+                  - { property : name , label: 'product.name' }
+                  - { property : description , label: 'product.description', type: 'FOS\CKEditorBundle\Form\Type\CKEditorType'}
+                  - { property : price , label: 'product.price' }
+            list:
+                max_results: 10
+                fields:
+                  - { property : id , label: 'product.id' }
+                  - { property : name , label: 'product.name' }
+                  - { property : price , label: 'product.price' }

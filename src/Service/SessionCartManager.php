@@ -39,7 +39,8 @@ class SessionCartManager
     public function updateCart(Product $product, int $quantity = 1) : void
     {
         $cartItem = $this->getCartItemForProduct($product);
-        $this->sessionCart->updateCartItem($cartItem, $quantity);
+        $cartItem->setQuantity($quantity);
+        $this->sessionCart->updateCartItem($cartItem);
         $this->updateSessionCart();
     }
 
@@ -103,7 +104,7 @@ class SessionCartManager
     private function updateSessionCart() : void
     {
         if ($this->session->has(self::SHOPPING_CART_SESSION_VARNAME)) {
-            $this->sessionCart = $this->session->get(self::SHOPPING_CART_SESSION_VARNAME);
+            $this->sessionCart = $this->getSessionCart();
         } else {
             $this->sessionCart = new ShoppingCart;
             $this->session->set(self::SHOPPING_CART_SESSION_VARNAME, $this->sessionCart);

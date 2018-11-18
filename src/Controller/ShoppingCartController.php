@@ -70,7 +70,6 @@ class ShoppingCartController extends AbstractController
             $cartItem = $form->getData();
             $cartManager->updateItemInCart($cartItem);
 
-
             if ($cartManager->getSessionCart()->getItemTotalCount() > 0) {
 
                 $this->addFlash(
@@ -84,10 +83,12 @@ class ShoppingCartController extends AbstractController
 
         $errors = $form->getErrors();
 
-        $this->addFlash(
-            'error',
-            $errors
-        );
+        foreach($errors as $error){
+            $this->addFlash(
+                'danger',
+                $error->getMessage()
+            );
+        }
 
         return $this->redirectToRoute('product_list');
     }
@@ -108,16 +109,14 @@ class ShoppingCartController extends AbstractController
         $cartManager->removeFromCart($product);
 
         if ($cartManager->getSessionCart()->getItemTotalCount() > 0) {
-
             $this->addFlash(
                 'info',
                 $translator->trans('cart.success.remove')
             );
-
-            return $this->redirectToRoute('shopping_cart');
         }
 
-        return $this->redirectToRoute('product_list');
+        return $this->redirectToRoute('shopping_cart');
+
     }
 
     /**

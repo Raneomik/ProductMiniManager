@@ -10,7 +10,7 @@
         <ul>
         {% for product_item in product_items %}
             <li>{{ product_item.product.name }} ({{ 'product.quantity'|trans }} : {{ product_item.quantity }} )
-                <a href="{{ path('product_detail', {'id': product_item.product.id}) }}">{{ 'product.see.details'|trans }}</a>
+                <a href="{{ path('product_detail', {'slug': product_item.product.slug}) }}">{{ 'product.see.details'|trans }}</a>
                 <a class="btn btn-default btn-sm text-right" href="{{ path('shopping_cart_remove', {'id': product_item.product.id}) }}">
                     <i class="fa fa-minus"></i> {{ 'cart.remove.one'|trans }}
                 </a>

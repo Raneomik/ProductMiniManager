@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 /**
  * Class ProductController
  * @package App\Controller
+ * @Route("/api")
  */
 class ProductApiController extends AbstractController
 {
@@ -32,7 +33,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/product/{id}", name="api_product_details")
+     * @Route("/product/{slug}", name="api_product_details")
      * @param SerializerInterface $serializer
      * @param Product $product
      * @return JsonResponse

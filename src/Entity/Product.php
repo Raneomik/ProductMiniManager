@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -15,6 +16,12 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -41,6 +48,18 @@ class Product
         $this->id = $id;
 
         return $this;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 
     public function getName(): string

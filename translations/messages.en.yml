@@ -1,5 +1,6 @@
 cart:
   add: Add to cart
+  update: Update cart
   remove: Remove from cart
   remove.one: Remove one from cart
   name: Shopping cart
@@ -8,6 +9,7 @@ cart:
   total : Total
   success :
     add: Product added to cart successfully !
+    update: Cart successfully updated !
     remove: Product removed
     cleanup: Shopping cart emptied !
 

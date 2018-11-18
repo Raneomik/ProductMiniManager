@@ -5,21 +5,8 @@
 {% block content %}
 
     <h1 class="text-center m-3">{{ 'cart.name'|trans }}</h1>
-
-    <div class="clearfix">
-        <ul>
-        {% for product_item in product_items %}
-            <li>{{ product_item.product.name }} ({{ 'product.quantity'|trans }} : {{ product_item.quantity }} )
-                <a href="{{ path('product_detail', {'slug': product_item.product.slug}) }}">{{ 'product.see.details'|trans }}</a>
-                <a class="btn btn-default btn-sm text-right" href="{{ path('shopping_cart_remove', {'id': product_item.product.id}) }}">
-                    <i class="fa fa-minus"></i> {{ 'cart.remove.one'|trans }}
-                </a>
-            </li>
-
-        {% endfor %}
-        </ul>
-
-        {% if product_items|length %}
+    {% if product_items|length %}
+        <div class="container m-3">
             <label>{{ 'cart.total'|trans }} : <strong>{{ total_price ~ 'currency.symbol.euro'|trans }}</strong></label>
 
             <div class="float-right">
@@ -28,7 +15,40 @@
                     <strong>{{ 'cart.clean'|trans }}</strong>
                 </a>
             </div>
-        {% endif %}
+        </div>
+    <div class="clearfix">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'Product'|trans }}</th>
+                    <th scope="col">{{ 'product.quantity'|trans }}</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product_item in product_items %}
+                <tr>
+                    <th scope="row">
+                        <a href="{{ path('product_detail', {'slug': product_item.element.product.slug}) }}">{{ product_item.element.product.name }}</a>
+                    </th>
+                    <td class="form-group">
+                        {{ form_start(product_item.form, { 'action' : path('shopping_cart_update'), 'attr' : { 'class' : 'row' } }) }}
+                            {{ form_widget(product_item.form.quantity, { 'attr' : {'class' : 'w-25'} } ) }}
+                            {{ form_widget(product_item.form.update_cart) }}
+                        {{ form_end(product_item.form) }}
+
+                    </td>
+                    <td>
+                        <a class="btn btn-default btn-sm text-right" href="{{ path('shopping_cart_remove', {'id': product_item.element.product.id}) }}">
+                            <i class="fa fa-minus"></i> {{ 'cart.remove.one'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+    {% endif %}
 
 {% endblock %}

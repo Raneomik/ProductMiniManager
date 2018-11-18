@@ -10,22 +10,36 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddToCartType extends CartItemAbstractType
+abstract class CartItemAbstractType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
-        parent::buildForm($builder, $options);
         $builder
             ->add(
-                'add_to_cart',
-                SubmitType::class,
+                'quantity',
+                IntegerType::class,
                 [
-                    'label' => 'cart.add',
+                    'label' => false,
                     'attr'  => [
                         'class' => 'w-50',
                     ],
                 ]
+            )
+            ->add(
+                'product',
+                HiddenEntityType::class,
+                [
+                    'class' => Product::class,
+                ]
             );
     }
 
+    public function configureOptions(OptionsResolver $resolver) : void
+    {
+        $resolver->setDefaults(
+            [
+                'data_class' => CartItem::class,
+            ]
+        );
+    }
 }

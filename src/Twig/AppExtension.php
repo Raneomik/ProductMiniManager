@@ -37,7 +37,13 @@ class AppExtension extends AbstractExtension
 
     public function getCartTotalItemsNumber() : int
     {
-        return $this->sessionCartManager->getSessionCart()->getItemTotalCount();
+        $shoppingCart = $this->sessionCartManager->getSessionCart();
+
+        if($shoppingCart){
+            return $shoppingCart->getItemTotalCount();
+        }
+
+        return 0;
     }
 
     public function getAvailableLocales() : array

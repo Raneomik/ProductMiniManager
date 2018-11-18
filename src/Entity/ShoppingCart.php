@@ -35,13 +35,13 @@ class ShoppingCart
         return $this->cartItems;
     }
 
-    public function updateCartItem(CartItem $cartItem): self
+    public function addCartItem(CartItem $cartItem): self
     {
         $oldCartItem = $this->getCartItem($cartItem);
         $newSum = $oldCartItem->getQuantity() + $cartItem->getQuantity();
 
         if($newSum <= 0) {
-            $this->cartItems->removeElement($cartItem);
+            $this->removeCartItem($cartItem);
             return $this;
         }
 
@@ -51,10 +51,23 @@ class ShoppingCart
         return $this;
     }
 
+    public function updateCartItem(CartItem $cartItem): self
+    {
+        if($cartItem->getQuantity() <=  0){
+            $this->removeCartItem($cartItem);
+
+            return $this;
+        }
+
+        $this->cartItems->set($cartItem->getId(), $cartItem);
+
+        return $this;
+    }
+
     public function removeCartItem(CartItem $cartItem, int $quantity = 1): self
     {
-        if ($this->cartItems->contains($cartItem)) {
-            if ($cartItem->getQuantity() == 1) {
+        if ($this->hasCartItem($cartItem)) {
+            if ($cartItem->getQuantity() <= 1) {
                 $this->cartItems->removeElement($cartItem);
             } else {
                 $cartItem = $this->getCartItem($cartItem);
@@ -104,9 +117,23 @@ class ShoppingCart
         return $cartItem->getTotalPrice();
     }
 
-    public function cleanUp() : void
+    public function cleanUp() : self
     {
         $this->cartItems = new ArrayCollection();
+
+        return $this;
     }
 
+    private function hasCartItem(CartItem $cartItem) : bool
+    {
+        $foundCartItem = false;
+        foreach ($this->cartItems->toArray() as $ci) {
+            if ($ci->getId() === $cartItem->getId()) {
+                $foundCartItem = true;
+                break;
+            }
+        }
+
+        return $foundCartItem;
+    }
 }

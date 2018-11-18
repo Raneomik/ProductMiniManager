@@ -29,6 +29,7 @@ class SessionCartManager
     public function __construct(SessionInterface $session)
     {
         $this->session = $session;
+        $this->sessionCart = new ShoppingCart;
         $this->updateSessionCart();
     }
 
@@ -36,11 +37,11 @@ class SessionCartManager
      * @param Product $product
      * @param int     $quantity
      */
-    public function updateCart(Product $product, int $quantity = 1) : void
+    public function addToCart(Product $product, int $quantity = 1): void
     {
         $cartItem = $this->getCartItemForProduct($product);
         $cartItem->setQuantity($quantity);
-        $this->sessionCart->updateCartItem($cartItem);
+        $this->sessionCart->addCartItem($cartItem);
         $this->updateSessionCart();
     }
 
@@ -48,7 +49,7 @@ class SessionCartManager
      * @param Product $product
      * @param int     $quantity
      */
-    public function removeFromCart(Product $product, int $quantity = 1) : void
+    public function removeFromCart(Product $product, int $quantity = 1): void
     {
         $cartItem = $this->getCartItemForProduct($product);
         $this->sessionCart->removeCartItem($cartItem, $quantity);
@@ -58,16 +59,26 @@ class SessionCartManager
     /**
      * @param CartItem $item
      */
-    public function updateItemInCart(CartItem $item) : void
+    public function addItemToCart(CartItem $item): void
     {
-        $this->sessionCart->updateCartItem($item);
+        $this->sessionCart = $this->sessionCart->addCartItem($item);
         $this->updateSessionCart();
     }
 
     /**
      * @param CartItem $item
      */
-    public function removeItemFromCart(CartItem $item) : void
+    public function updateItemInCart(CartItem $item): void
+    {
+        $this->sessionCart->updateCartItem($item);
+        $this->updateSessionCart();
+    }
+
+
+    /**
+     * @param CartItem $item
+     */
+    public function removeItemFromCart(CartItem $item): void
     {
         $this->sessionCart->removeCartItem($item);
         $this->updateSessionCart();
@@ -103,12 +114,11 @@ class SessionCartManager
      */
     private function updateSessionCart() : void
     {
-        if ($this->session->has(self::SHOPPING_CART_SESSION_VARNAME)) {
-            $this->sessionCart = $this->getSessionCart();
-        } else {
+        if (! $this->session->has(self::SHOPPING_CART_SESSION_VARNAME)) {
             $this->sessionCart = new ShoppingCart;
-            $this->session->set(self::SHOPPING_CART_SESSION_VARNAME, $this->sessionCart);
         }
+        $this->session->set(self::SHOPPING_CART_SESSION_VARNAME, $this->sessionCart);
+
     }
 
     /**

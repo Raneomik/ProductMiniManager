@@ -30,7 +30,7 @@ class ShoppingCartTest extends TestCase
 
         $cartItem = $this->createCartItem();
         $cartItem->setQuantity(3);
-        $this->shoppingCart->updateCartItem($cartItem);
+        $this->shoppingCart->addCartItem($cartItem);
 
         $this->assertEquals($cartItem->getQuantity(), 3);
     }
@@ -43,7 +43,7 @@ class ShoppingCartTest extends TestCase
         $this->shoppingCart->cleanUp();
 
         $cartItem = $this->createCartItem();
-        $this->shoppingCart->updateCartItem($cartItem);
+        $this->shoppingCart->addCartItem($cartItem);
         $this->shoppingCart->removeCartItem($cartItem);
 
         $this->assertEquals($this->shoppingCart->getItemTotalCount(), 0);
@@ -58,14 +58,14 @@ class ShoppingCartTest extends TestCase
 
         $cartItem1 = $this->createCartItem();
         $cartItem1->setQuantity(2);
-        $this->shoppingCart->updateCartItem($cartItem1); // +2
+        $this->shoppingCart->addCartItem($cartItem1); // +2
 
         $cartItem2 = $this->createCartItem();
         $cartItem2->setQuantity(3);
-        $this->shoppingCart->updateCartItem($cartItem2); // +3
+        $this->shoppingCart->addCartItem($cartItem2); // +3
 
         $cartItem3 = $this->createCartItem();
-        $this->shoppingCart->updateCartItem($cartItem3); // +1
+        $this->shoppingCart->addCartItem($cartItem3); // +1
 
         $this->assertEquals($this->shoppingCart->getItemTotalCount(), 6);
     }
@@ -78,14 +78,14 @@ class ShoppingCartTest extends TestCase
         $this->shoppingCart->cleanUp();
 
         $cartItem1 = $this->createCartItem();
-        $this->shoppingCart->updateCartItem($cartItem1); // +1
+        $this->shoppingCart->addCartItem($cartItem1); // +1
 
         $cartItem2 = $this->createCartItem();
         $cartItem2->setQuantity(5);
-        $this->shoppingCart->updateCartItem($cartItem2); // +5
+        $this->shoppingCart->addCartItem($cartItem2); // +5
 
         $cartItem3 = $this->createCartItem();
-        $this->shoppingCart->updateCartItem($cartItem3); // +1
+        $this->shoppingCart->addCartItem($cartItem3); // +1
 
         $this->shoppingCart->removeCartItem($cartItem2); // -1
 
@@ -102,16 +102,16 @@ class ShoppingCartTest extends TestCase
         $totalExpected = 0;
 
         $cartItem1 = $this->createCartItem();
-        $this->shoppingCart->updateCartItem($cartItem1);
+        $this->shoppingCart->addCartItem($cartItem1);
         $totalExpected += $cartItem1->getProduct()->getPrice();
 
         $cartItem2 = $this->createCartItem();
         $cartItem2->setQuantity(5);
-        $this->shoppingCart->updateCartItem($cartItem2);
+        $this->shoppingCart->addCartItem($cartItem2);
         $totalExpected += 5 * $cartItem2->getProduct()->getPrice();
 
         $cartItem3 = $this->createCartItem();
-        $this->shoppingCart->updateCartItem($cartItem3);
+        $this->shoppingCart->addCartItem($cartItem3);
         $totalExpected += $cartItem3->getProduct()->getPrice();
 
         $this->shoppingCart->removeCartItem($cartItem2);

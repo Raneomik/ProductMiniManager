@@ -38,7 +38,7 @@ class SessionCartManagerTest extends KernelTestCase
             $cartItem = new CartItem();
             $cartItem->setProduct($product);
             $cartItem->setQuantity(2);
-            $this->cartManager->updateItemInCart($cartItem);
+            $this->cartManager->addItemToCart($cartItem);
         }
 
         $this->assertEquals($this->cartManager->getSessionCart()->getItemTotalCount(), 24);
@@ -48,7 +48,7 @@ class SessionCartManagerTest extends KernelTestCase
     {
         $products = $this->objectManager->getRepository(Product::class)->findAll();
         foreach ($products as $product) {
-            $this->cartManager->updateCart($product);
+            $this->cartManager->addToCart($product);
         }
 
         $this->assertEquals($this->cartManager->getSessionCart()->getItemTotalCount(), 12);
@@ -58,7 +58,7 @@ class SessionCartManagerTest extends KernelTestCase
     {
         $products = $this->objectManager->getRepository(Product::class)->findAll();
         foreach ($products as $product) {
-            $this->cartManager->updateCart($product);
+            $this->cartManager->addToCart($product);
         }
         
         foreach ($products as $product) {

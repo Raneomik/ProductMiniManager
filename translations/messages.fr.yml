@@ -1,5 +1,6 @@
 cart:
   add: Ajouter au panier
+  update: Mettre à jour le panier
   remove: Supprimer du panier
   remove.one: Supprimer un élément du panier
   name: Mon panier
@@ -8,6 +9,7 @@ cart:
   total : Total
   success :
     add: Produit ajouté avec succés !
+    update: Panier mis à jour avec succés !
     remove : Produit enlevé
     cleanup: Panier vidé !
 

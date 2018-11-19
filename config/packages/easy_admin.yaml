@@ -22,3 +22,6 @@ easy_admin:
                   - { property: imageName, label: 'product.image', type: 'image', base_path: '%path.product_images%'}
                   - { property : name , label: 'product.name' }
                   - { property : price , label: 'product.price' }
+    design:
+        templates:
+            layout: 'override/admin_layout.html.twig'

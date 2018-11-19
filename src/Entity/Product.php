@@ -113,6 +113,13 @@ class Product
         return $this->price;
     }
 
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
     public function setImageFile(?File $imageFile) : self
     {
         $this->imageFile = $imageFile;

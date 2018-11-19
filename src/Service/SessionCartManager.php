@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class SessionCartManager
 {
 
-    public const SHOPPING_CART_SESSION_VARNAME = 'shopping_cart';
+    static private $sessionCartVarName = 'shopping_cart';
 
     /**
      * @var SessionInterface $session
@@ -106,7 +106,7 @@ class SessionCartManager
      */
     public function getSessionCart() : ShoppingCart
     {
-        return $this->session->get(self::SHOPPING_CART_SESSION_VARNAME);
+        return $this->session->get(self::$sessionCartVarName);
     }
 
     /**
@@ -114,10 +114,10 @@ class SessionCartManager
      */
     private function updateSessionCart() : void
     {
-        if (! $this->session->has(self::SHOPPING_CART_SESSION_VARNAME)) {
+        if (! $this->session->has(self::$sessionCartVarName)) {
             $this->sessionCart = new ShoppingCart;
         }
-        $this->session->set(self::SHOPPING_CART_SESSION_VARNAME, $this->sessionCart);
+        $this->session->set(self::$sessionCartVarName, $this->sessionCart);
 
     }
 

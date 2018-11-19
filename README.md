@@ -29,7 +29,6 @@ get containers IP address (if you want to access it by navigator and/or setup a 
 sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' product-manager-srv
 ```
 
-
 * init and populate db :
 ```
 sudo docker exec product-manager-srv php bin/console doctrine:schema:update --force
@@ -41,8 +40,22 @@ sudo docker exec product-manager-srv php bin/console doctrine:fixtures:load
 yarn build
 ```
 
+### Use the app
+
+You should now be able to navigate through the app, and also access the EasyAdmin backOffice at : `/admin`
+
 * run tests :
 ```
 sudo docker exec product-manager-srv bin/phpunit
 ```
 
+* API product endpoits :
+
+You can get a json list of products at `/api/products`
+
+and a specific product at `/api/product/{slug}`
+
+* CSV product export :
+```
+sudo docker exec product-manager-srv php bin/console export:products:csv
+```

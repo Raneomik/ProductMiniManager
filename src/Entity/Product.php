@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -17,12 +19,14 @@ class Product
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("default")
      */
     private $id;
 
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=255, unique=true)
+     * @Groups("default")
      */
     private $slug;
 
@@ -33,11 +37,13 @@ class Product
 
     /**
      * @ORM\Column(type="text", length=255, nullable=true)
+     * @Groups("default")
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("default")
      */
     private $price;
 
@@ -132,8 +138,8 @@ class Product
     }
 
 
-    public function __toString() : int
+    public function __toString() : string
     {
-        return $this->id;
+        return $this->name;
     }
 }

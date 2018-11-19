@@ -11,6 +11,8 @@ parameters:
       - 'fr'
     path.product_images: '/uploads/images/products'
 
+    csv.file.export : '%kernel.project_dir%/public/export/products.csv'
+
 services:
     # default configuration for services in *this* file
     _defaults:

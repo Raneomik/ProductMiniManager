@@ -65,9 +65,9 @@
     },
     "scripts": {
         "auto-scripts": {
-            "ckeditor:install %PUBLIC_DIR%/bundles/fosckeditor --no-progress-bar --clear=keep": "symfony-cmd",
+            "mkdir -p assets/fosckeditor" : "script",
+            "ckeditor:install assets/fosckeditor --no-progress-bar --clear=keep": "symfony-cmd",
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "security-checker security:check": "script"
         },
         "post-install-cmd": [

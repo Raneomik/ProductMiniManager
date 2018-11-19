@@ -7,6 +7,6 @@ services:
       context: .
       dockerfile: docker/dockerfile-server
       args:
-        VIRTUAL_HOST: 'product.manager.sf' #To add to your hosts with container-ip
+        VIRTUAL_HOST: 'product.manager.sf'
     volumes:
       - ./:/var/www/html

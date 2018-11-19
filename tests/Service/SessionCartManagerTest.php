@@ -60,7 +60,7 @@ class SessionCartManagerTest extends KernelTestCase
         foreach ($products as $product) {
             $this->cartManager->addToCart($product);
         }
-        
+
         foreach ($products as $product) {
             $this->cartManager->removeFromCart($product);
         }

@@ -2,13 +2,17 @@ FROM php:7.1-apache
 
 ARG VIRTUAL_HOST
 
-ADD ./public /var/www/html/public
 ADD ./docker/conf/app.conf /etc/apache2/sites-available/$VIRTUAL_HOST.conf
 
 RUN sed -i 's/APP_HOST/$VIRTUAL_HOST/g' /etc/apache2/sites-available/$VIRTUAL_HOST.conf
 
 RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf
 
+ADD ./public /var/www/html/public
+ADD ./var /var/www/html/var
+
+RUN chmod a+w /var/www/html/public
+RUN chmod a+w /var/www/html/var
 
 #RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf \
 RUN a2enconf fqdn \

@@ -29,11 +29,14 @@ get containers IP address (if you want to access it by navigator and/or setup a 
 sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' product-manager-srv
 ```
 
-* init and populate db :
+* init and populate database :
 ```
 sudo docker exec product-manager-srv php bin/console doctrine:schema:update --force
 sudo docker exec product-manager-srv php bin/console doctrine:fixtures:load
 ```
+(if you wish to use it locally - outside docker container - , be sure you have installed and enabled pdo_sqlite php extension)
+
+_nb : if you wish update/populate the database using `sudo docker exec product-manager-srv php bin/console doctrine:migration:migrate`, you might have missing column problems. Simply comment the concerned product property between migration applications._
 
 * build js/css/font/img... assets :
 ```

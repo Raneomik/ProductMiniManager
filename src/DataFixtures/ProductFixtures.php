@@ -8,6 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use KnpU\LoremIpsumBundle\KnpUIpsum;
 use Nubs\RandomNameGenerator\Vgng as NameGenerator;
+use Symfony\Component\HttpFoundation\File\File;
 
 class ProductFixtures extends Fixture
 {

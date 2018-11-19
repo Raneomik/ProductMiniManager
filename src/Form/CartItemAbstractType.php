@@ -21,7 +21,7 @@ abstract class CartItemAbstractType extends AbstractType
                 [
                     'label' => false,
                     'attr'  => [
-                        'class' => 'w-50',
+                        'class' => 'w-75',
                     ],
                 ]
             )

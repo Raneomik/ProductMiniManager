@@ -54,9 +54,7 @@ class ShoppingCart
     public function updateCartItem(CartItem $cartItem): self
     {
         if($cartItem->getQuantity() <=  0){
-            $this->removeCartItem($cartItem);
-
-            return $this;
+            return $this->removeCartItem($cartItem);
         }
 
         $this->cartItems->set($cartItem->getId(), $cartItem);

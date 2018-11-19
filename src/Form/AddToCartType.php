@@ -22,7 +22,7 @@ class AddToCartType extends CartItemAbstractType
                 [
                     'label' => 'cart.add',
                     'attr'  => [
-                        'class' => 'w-50',
+                        'class' => 'w-75',
                     ],
                 ]
             );

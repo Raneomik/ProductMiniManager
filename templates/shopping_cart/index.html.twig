@@ -32,10 +32,10 @@
                     <th scope="row">
                         <a href="{{ path('product_detail', {'slug': product_item.element.product.slug}) }}">{{ product_item.element.product.name }}</a>
                     </th>
-                    <td class="form-group">
-                        {{ form_start(product_item.form, { 'action' : path('shopping_cart_update'), 'attr' : { 'class' : 'row' } }) }}
-                            {{ form_widget(product_item.form.quantity, { 'attr' : {'class' : 'w-25'} } ) }}
-                            {{ form_widget(product_item.form.update_cart) }}
+                    <td class="form-group ">
+                        {{ form_start(product_item.form, { 'action' : path('shopping_cart_update'), 'attr' : { 'class' : 'foprm-group row align-items-center' } }) }}
+                            {{ form_widget(product_item.form.quantity, { 'attr' : {'class' : 'col-sm-4'} } ) }}
+                            {{ form_widget(product_item.form.update_cart, { 'attr' : {'class' : 'float-right col-sm-6'} } ) }}
                         {{ form_end(product_item.form) }}
 
                     </td>

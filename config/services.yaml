@@ -9,7 +9,7 @@ parameters:
     app_locales:
       - 'en'
       - 'fr'
-    path.product_images: '/uploads/images/products'
+    path.product_images: '/uploads'
 
     csv.file.export : '%kernel.project_dir%/public/export/products.csv'
 

@@ -3,35 +3,23 @@
 namespace App\Command;
 
 use App\Entity\Product;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ExportProductsCsvCommand extends ContainerAwareCommand
 {
     protected static $defaultName = 'export:products:csv';
 
-    /** @var ManagerRegistry $managerRegistry */
-    private $managerRegistry;
-
-    /** @var ObjectManager $objectManager */
-    private $objectManager;
-
-    protected function configure()
+    protected function configure() : void
     {
         $this
             ->setDescription('Product export to a csv file')
         ;
-
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : void
     {
         $output->writeln('initializing export...');
 
@@ -57,8 +45,8 @@ class ExportProductsCsvCommand extends ContainerAwareCommand
                 'price' =>  $product->getPrice(),
                 'description' => $product->getDescription(),
             ];
-            $progressBar->setMessage("processing '${productName}'");
 
+            $progressBar->setMessage("processing '${productName}'");
             $progressBar->advance();
         }
 

@@ -42,17 +42,16 @@ yarn build
 
 ### Use the app
 
-You should now be able to navigate through the app, and also access the EasyAdmin backOffice at : `/admin`
+You should now be able to navigate through the app, and also manage the products with the EasyAdmin backOffice at : `{/fr}/admin` with credentials 'admin':'password'
 
 * run tests :
 ```
 sudo docker exec product-manager-srv bin/phpunit
 ```
 
-* API product endpoits :
+* API product endpoints :
 
 You can get a json list of products at `/api/products`
-
 and a specific product at `/api/product/{slug}`
 
 * CSV product export :
